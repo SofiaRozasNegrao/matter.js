@@ -11,6 +11,8 @@ var canhao
 var bolaCanhao
 var angulo
 
+var bolas=[]
+
 function preload() {
   fundoImagem = loadImage('assets/background.gif')
   torreImg=loadImage('assets/tower.png')
@@ -52,11 +54,26 @@ function draw() {
   pop()
 
   canhao.desenha()
-  bolaCanhao.desenha()
+  for (var indice = 0; indice < bolas.length; indice++) {
+    mostrarBola(bolas[indice])
+  }
+}
+
+function keyPressed(){
+  if(keyCode===DOWN_ARROW){
+    var bolaCanhao=new BolaCanhao(canhao.x,canhao.y)
+    bolas.push(bolaCanhao)
+  }
 }
 
 function keyReleased(){
   if(keyCode===DOWN_ARROW){
-    bolaCanhao.atira()
+    bolas[bolas.length-1].atira()
   }
+}
+
+function mostrarBola(bola){
+  if(bola){
+    bola.desenha()
+    }
 }
